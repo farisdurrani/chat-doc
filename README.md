@@ -10,12 +10,12 @@ cp .env.example .env
 ```
 - Get your OpenAI key from [OpenAI](https://platform.openai.com/docs/quickstart/build-your-application) and copy your secret API key. Set it as the OPENAI_API_KEY in your newly created `.env` file
 - Install the requirements and start the server
-```
+```sh
 pip install -r requirements.txt
 python app.py
 ```
 2. To start the frontend,
-```
+```sh
 cd frontend
 npm install
 npm start
