@@ -1,12 +1,21 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { Camera, CameraType } from "expo-camera";
-import { Button, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+  Alert,
+  Button,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
+import { firebase } from "../utils/firebase";
 
 const Home = () => {
   const [type, setType] = useState(CameraType.back);
   const [permission, requestPermission] = Camera.useCameraPermissions();
   const [camera, setCamera] = useState();
+  const [image, setImage] = useState();
 
   //
   // Request camera permissions
@@ -30,6 +39,21 @@ const Home = () => {
     );
   }
 
+  async function uploadImage() {
+    const response = await fetch(image.uri);
+    const blob = await response.blob();
+    const filename = image.uri.substring(image.uri.lastIndexOf("/") + 1);
+    const ref = firebase.storage.ref().child(filename).put(blob);
+
+    try {
+      await ref;
+    } catch (e) {
+      console.log(e);
+    }
+    Alert.alert("Photo uploaded");
+    setImage(null);
+  }
+
   function toggleCameraType() {
     setType((current) =>
       current === CameraType.back ? CameraType.front : CameraType.back
@@ -40,6 +64,7 @@ const Home = () => {
     if (camera) {
       const data = await camera.takePictureAsync(null);
       console.log(data.uri);
+      setImage(data);
     }
   }
 
@@ -86,7 +111,6 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: "bold",
     color: "white",
-    textAlign: "center",
   },
   takePicBtn: {
     fontSize: 24,
