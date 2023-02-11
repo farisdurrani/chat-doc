@@ -1,6 +1,8 @@
 from flask import Flask, request
 from flask_cors import CORS
 import json
+from api import get_chatgpt_response
+import openai
 
 app = Flask(__name__)
 CORS(app)
@@ -18,7 +20,8 @@ def hello_world():
 def process_question():
     body = json.loads(request.json["body"])
     question = body["question"]
-    return {"question": question}
+    response = get_chatgpt_response(question)
+    return {"answer": response}
 
 
 if __name__ == "__main__":
