@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import PropTypes from "prop-types";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Navbar, Nav, Container } from "react-bootstrap";
 import axios from "axios";
 
 const BACKEND_PORT = 8000;
@@ -12,7 +12,7 @@ const Home = () => {
     console.log(question);
     axios
       .post(`http://localhost:${BACKEND_PORT}/api/question`, {
-        body: JSON.stringify({question: question}),
+        body: JSON.stringify({ question: question }),
       })
       .then((res) => {
         console.log(res.data);
@@ -22,7 +22,7 @@ const Home = () => {
   return (
     <div className="container">
       <h1>Write your question</h1>
-      <Form >
+      <Form>
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Label>Password</Form.Label>
           <Form.Control type="text" placeholder="Question" ref={questionRef} />
