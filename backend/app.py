@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 import json
-from api import get_chatgpt_response
+from api import get_chatgpt_response, image64ToImage
 import openai
 
 app = Flask(__name__)
@@ -25,4 +25,5 @@ def process_question():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=PORT)
+    image64ToImage()
+    # app.run(debug=True, host="0.0.0.0", port=PORT)
