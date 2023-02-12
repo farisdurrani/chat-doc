@@ -1,12 +1,13 @@
 import './App.css';
+import 'react-toastify/dist/ReactToastify.css';
 import Home from './Home';
-import NavbarMain from './NavbarMain';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   return (
     <div className="App">
-      <NavbarMain/>
       <Home/>
+      <ToastContainer autoClose={2500} />
     </div>
   );
 }

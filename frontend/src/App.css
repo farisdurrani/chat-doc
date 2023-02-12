@@ -1,25 +1,49 @@
 :root {
-    --bs-dark-rgb: 30, 56, 136;
-    /* --bs-body-color: #ffffff; */
-    --bs-navbar-brand-color: #ffffff;
+  --bs-dark-rgb: 15, 23, 42;
+  --bs-body-color: lightblue;
+  --bs-navbar-brand-color: #ffffff;
 }
 
 body {
-    background-color: rgb(var(--bs-dark-rgb));
+  background-color: rgb(var(--bs-dark-rgb));
+}
+
+.btn.btn-primary {
+  background-color: rgb(var(--bs-dark-rgb));
+  color: #ffffff;
+  border: 1px solid gray;
 }
 
 #home .chatgptAnswer {
-    background-color: #f5f5f5;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: 500;
+  background-color: #f5f5f5;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: 500;
 }
 
-
-.navbar-brand {
-    color: white;
+#home .promptBox {
+  background-color: var(--bs-dark-rgb);
+  border-radius: 10px;
+  font-size: 20px;
+  height: 100px;
+  color: white;
 }
 
-.nav-link {
-    color: lightgray;
+#home .answerBox {
+  background-color: var(--bs-dark-rgb);
+  border-radius: 10px;
+  font-size: 20px;
+  height: 100px;
+  color: white;
+}
+
+#home .disclaimer {
+  font-size: 11px;
+  color: gray;
+}
+
+#home p.disclaimer  {
+  margin: 0;
+  line-height: normal;
+  text-align: justify;
 }
