@@ -38,6 +38,7 @@ const Home = () => {
       toast.info("Querying symptoms...");
     }
     setLoadingAnswer(true);
+    setChatgptAnswer("");
     console.log({ question: question, image64: image64?.substring(0, 10) });
     axios
       .post(`http://localhost:${BACKEND_PORT}/api/question`, {
