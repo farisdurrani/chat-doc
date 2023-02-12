@@ -1,6 +1,25 @@
+:root {
+    --bs-dark-rgb: 30, 56, 136;
+    /* --bs-body-color: #ffffff; */
+    --bs-navbar-brand-color: #ffffff;
+}
+
+body {
+    background-color: rgb(var(--bs-dark-rgb));
+}
+
 #home .chatgptAnswer {
     background-color: #f5f5f5;
     border-radius: 10px;
     font-size: 20px;
     font-weight: 500;
+}
+
+
+.navbar-brand {
+    color: white;
+}
+
+.nav-link {
+    color: lightgray;
 }
