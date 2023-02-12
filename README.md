@@ -28,11 +28,12 @@ npm start
 4. The application will be live at http://localhost:3000 (with the backend server running on http://localhost:8000)
 
 # Preview
-<img width="1624" alt="Demonstration of app's function without any uploaded image" src="https://user-images.githubusercontent.com/40067313/218315216-403f72f6-db2d-406f-a849-cdf5126b1139.png">
 Demonstration of app's function without any uploaded image
+<img width="1624" alt="Demonstration of app's function without any uploaded image" src="https://user-images.githubusercontent.com/40067313/218315216-403f72f6-db2d-406f-a849-cdf5126b1139.png">
 
-<img width="1624" alt="Demonstration of app's function with an uploaded image" src="https://user-images.githubusercontent.com/40067313/218315568-354ce5ac-865d-4c53-8328-2646f60a77ce.png">
 Demonstration of app's function with an uploaded image (an option is presented to use the webcam as well)
+<img width="1624" alt="Demonstration of app's function with an uploaded image" src="https://user-images.githubusercontent.com/40067313/218315568-354ce5ac-865d-4c53-8328-2646f60a77ce.png">
+
 
 # License
 This app is MIT licensed, as found in the [LICENSE](./LICENSE) file.
