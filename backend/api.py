@@ -34,11 +34,11 @@ def __compare_chatgpt_cv(chat_res, cv_res) -> str:
 
 def __get_summary_diagnosis(comparison: float, cv_res: str) -> str:
     if comparison < 0.33:
-        return f"Our image analysis does not provide enough information to make a summary diagnosis, but below is an extended analysis. Feel free to add more information.\n\n"
-    elif comparison < 0.66:
-        return f"Our image analysis suggests that you may have a {cv_res}. Below is an extended analysis. Feel free to add more information.\n\n"
+        return f"Our image analysis does not provide enough information to make a summary diagnosis, but below is an extended analysis. Feel free to add more information."
+    elif comparison < 0.67:
+        return f"Our image analysis suggests that you may have a {cv_res}. Below is an extended analysis. Feel free to add more information."
     else:
-        return f"Our image analysis strongly suggests that you may have a {cv_res} when compared to your symptoms. Below is an extended analysis.\n\n"
+        return f"Our image analysis strongly suggests that you may have a {cv_res} when compared to your symptoms. Below is an extended analysis."
 
 
 def get_advice(prompt: str, image64: str) -> str:

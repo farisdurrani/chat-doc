@@ -48,6 +48,10 @@ body {
   text-align: justify;
 }
 
-#home .webcam {
-  width: 100%;
+#home .webcam-upload {
+  width: 70%;
+}
+
+#home .file-upload {
+  width: 50%;
 }

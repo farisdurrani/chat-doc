@@ -17,6 +17,7 @@ const Home = () => {
   const [takePhoto, setTakePhoto] = useState(false);
   const [chatgptAnswer, setChatgptAnswer] = useState();
   const [loadingAnswer, setLoadingAnswer] = useState(false);
+  const [uploadedImage, setUploadedImage] = useState();
 
   const capture = useCallback(() => {
     return webcamRef.current.getScreenshot();
@@ -28,18 +29,18 @@ const Home = () => {
       toast.error("Please enter your symptoms");
       return;
     }
+    setLoadingAnswer(true);
+    setChatgptAnswer("");
 
     console.log("Querying question: ", question);
     let image64;
     if (takePhoto) {
-      image64 = capture();
+      image64 = uploadedImage ? uploadedImage : capture();
       toast.info("Uploading photo and querying symptoms...");
     } else {
       toast.info("Querying symptoms...");
     }
-    setLoadingAnswer(true);
-    setChatgptAnswer("");
-    console.log({ question: question, image64: image64?.substring(0, 10) });
+    console.log({ question: question, image64Size: image64?.length });
     axios
       .post(`http://localhost:${BACKEND_PORT}/api/question`, {
         body: JSON.stringify({ question: question, image64: image64 }),
@@ -47,8 +48,26 @@ const Home = () => {
       .then((res) => {
         console.log("Response received");
         setChatgptAnswer(res.data.answer);
+        setLoadingAnswer(false);
       });
   };
+
+  async function handleUpload() {
+    const file = document.querySelector("#file-upload")?.files[0];
+    const reader = new FileReader();
+    reader.addEventListener(
+      "load",
+      () => {
+        const image64 = reader.result;
+        setUploadedImage(image64);
+      },
+      false
+    );
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
 
   return (
     <div className="container pt-4" id="home">
@@ -78,18 +97,31 @@ const Home = () => {
       </Form>
 
       {takePhoto ? (
-        <Webcam
-          audio={false}
-          className="webcam"
-          height={563}
-          ref={webcamRef}
-          screenshotFormat="image/jpeg"
-          width={1000}
-        />
+        <div className="webcam-upload d-flex flex-column align-items-center justify-content-center ms-auto me-auto">
+          <Webcam
+            audio={false}
+            className="mb-3"
+            height={563}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
+            width={1000}
+          />
+          <p>OR</p>
+          <Form.Control
+            onChange={handleUpload}
+            type="file"
+            id="file-upload"
+            className="file-upload mt-1"
+          />
+        </div>
       ) : null}
 
       <Form className="mt-3">
-        <Button variant="primary" onClick={handleSubmit}>
+        <Button
+          variant="primary"
+          onClick={handleSubmit}
+          disabled={loadingAnswer}
+        >
           Submit
         </Button>
 
