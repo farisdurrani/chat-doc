@@ -51,7 +51,7 @@ const Home = () => {
 
   return (
     <div className="container pt-4" id="home">
-      <h1>Doc AI</h1>
+      <h1>Upside Healthcare</h1>
       <Form>
         <Form.Group className="mt-5 mb-3" controlId="formBasicPassword">
           <Form.Label>
@@ -102,7 +102,7 @@ const Home = () => {
           value={chatgptAnswer}
         />
       </Form>
-      <p className="disclaimer mt-5">{disclaimer}</p>
+      <p className="disclaimer mt-5 mb-5">{disclaimer}</p>
     </div>
   );
 };
