@@ -4,6 +4,7 @@ import base64
 import re
 
 openai.api_key = os.getenv("OPENAI_API_KEY")
+PRIMING_TEXT = f"I would like for you to pretend like you are a primary care physician and based off of the information I tell you, I would like for you to tell me what possible condition I am experiencing, what are the potential treatments, and what are potential lab tests that I can do to find out more about my condition."
 
 
 def __remove_symbols(string):
@@ -41,8 +42,8 @@ def __get_summary_diagnosis(comparison: float, cv_res: str) -> str:
 
 
 def get_advice(prompt: str, image64: str) -> str:
-    prime_text = f"I would like your advice based on my current symtoms."
-    question = f"{prime_text} {prompt}"
+    
+    question = f"{PRIMING_TEXT} {prompt}"
 
     if not image64:
         return __get_chatgpt_response(question)
