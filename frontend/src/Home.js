@@ -44,7 +44,7 @@ const Home = () => {
         body: JSON.stringify({ question: question, image64: image64 }),
       })
       .then((res) => {
-        console.log("Response received", res.data);
+        console.log("Response received");
         setChatgptAnswer(res.data.answer);
       });
   };
