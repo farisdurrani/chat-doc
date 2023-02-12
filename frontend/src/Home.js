@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from "react";
-import { Button, Form, Accordion } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import Webcam from "react-webcam";
 import {
@@ -16,19 +16,10 @@ const Home = () => {
   const webcamRef = useRef(null);
   const [takePhoto, setTakePhoto] = useState(false);
   const [chatgptAnswer, setChatgptAnswer] = useState();
-  const [image64, setImage64] = useState();
   const [loadingAnswer, setLoadingAnswer] = useState(false);
 
-  const videoConstraints = {
-    width: 500,
-    height: 281,
-    facingMode: "user",
-  };
-
   const capture = useCallback(() => {
-    setImage64(null);
-    const imageSrc = webcamRef.current.getScreenshot();
-    setImage64(imageSrc);
+    return webcamRef.current.getScreenshot();
   }, [webcamRef]);
 
   const handleSubmit = () => {
@@ -38,15 +29,16 @@ const Home = () => {
       return;
     }
 
-    console.log("Capturing photo...");
-    capture();
     console.log("Querying question: ", question);
+    let image64;
     if (takePhoto) {
+      image64 = capture();
       toast.info("Uploading photo and querying symptoms...");
     } else {
       toast.info("Querying symptoms...");
     }
     setLoadingAnswer(true);
+    console.log({ question: question, image64: image64?.substring(0, 10) });
     axios
       .post(`http://localhost:${BACKEND_PORT}/api/question`, {
         body: JSON.stringify({ question: question, image64: image64 }),
@@ -61,9 +53,12 @@ const Home = () => {
     <div className="container pt-4" id="home">
       <h1>Doc AI</h1>
       <Form>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Group className="mt-5 mb-3" controlId="formBasicPassword">
           <Form.Label>
-            <h2>Prompt</h2>
+            <h2>
+              Hi. Tell us your symptoms and maybe upload a picture. We'll
+              provide suggestions
+            </h2>
           </Form.Label>
           <Form.Control
             className="promptBox"
@@ -71,7 +66,7 @@ const Home = () => {
             placeholder={questionPlaceholder}
             ref={questionRef}
           />
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
+          <Form.Group className="mt-3 mb-3" controlId="formBasicCheckbox">
             <Form.Check
               type="checkbox"
               label="Take photo"
@@ -84,21 +79,21 @@ const Home = () => {
       {takePhoto ? (
         <Webcam
           audio={false}
-          height={720}
+          className="webcam"
+          height={563}
           ref={webcamRef}
           screenshotFormat="image/jpeg"
-          width={1280}
-          videoConstraints={videoConstraints}
+          width={1000}
         />
       ) : null}
 
-      <Form>
+      <Form className="mt-3">
         <Button variant="primary" onClick={handleSubmit}>
           Submit
         </Button>
 
         <Form.Control
-          className="answerBox mt-4"
+          className="answerBox mt-5"
           readOnly
           as="textarea"
           placeholder={

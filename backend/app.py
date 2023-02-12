@@ -20,8 +20,7 @@ def hello_world():
 def process_question():
     body = json.loads(request.json["body"])
     question = body["question"]
-    image64 = body["image64"]
-    return {"answer": 111}
+    image64 = body.get("image64")
     response = get_advice(question, image64)
     return {"answer": response}
 
