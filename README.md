@@ -1,6 +1,8 @@
 # Chat-Doc
 An AI chatbot that can give preliminary diagnosis of diseases and suggest remedies.
 
+A hackathon project for Hackalytics 2023 submitted on [Devpost](https://devpost.com/software/philoh?ref_content=user-portfolio&ref_feature=in_progress).
+
 # How to start
 1. Prerequisites:
 - Python 3.10+
